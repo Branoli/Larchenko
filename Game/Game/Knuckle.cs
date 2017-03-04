@@ -19,17 +19,16 @@ namespace Game
 
         public int[,] ArrOfKnuckle(int GetLenght)
         {
-            int[,] mas = new int[GetLenght, GetLenght];
             int x = 0;
             for (int i = 0; i < GetLenght; i++)
             {
                 for (int j = 0; j < GetLenght; j++)
                 {
-                    mas[i, j] = x;
+                    ArrOfKnuckles[i, j] = x;
                     x++;
                 }
             }
-            return mas;
+            return ArrOfKnuckles;
         }
         public void PrintOfKnuckles()
         {
@@ -60,7 +59,7 @@ namespace Game
             do
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write("Какую костяшку, по отношению к нулю, передвинуть ");
+                Console.Write("Какую костяшку, ПО ОНОШЕНИЮ ---К НУЛЮ---, передвинуть ");
                 Console.ForegroundColor = ConsoleColor.White;
                 q = Convert.ToInt32(Console.ReadLine());
 
@@ -284,19 +283,14 @@ namespace Game
         public void RandomGen()
         {
             Random gen = new Random();
-            int x = 0, z = 0, c = 0;
+            int x = 0;
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
                 {
-
-                    z = gen.Next(0, (ArrOfKnuckles.GetLength(0) - 1));
-                    c = gen.Next(0, (ArrOfKnuckles.GetLength(1) - 1));
-
-
                     x = ArrOfKnuckles[i, j];
-                    ArrOfKnuckles[i, j] = ArrOfKnuckles[z, c];
-                    ArrOfKnuckles[z, c] = x;
+                    ArrOfKnuckles[i, j] = ArrOfKnuckles[0, ArrOfKnuckles.GetLength(0) -1];
+                    ArrOfKnuckles[0, ArrOfKnuckles.GetLength(0) - 1] = x;
 
                 }
             }
