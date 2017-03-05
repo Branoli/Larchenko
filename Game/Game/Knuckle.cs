@@ -8,7 +8,7 @@ namespace Game
 {
     class Knuckle
     {
-        public int[,] ArrOfKnuckles;
+        private int[,] ArrOfKnuckles;
         public Knuckle(int GetLenght)
         {
             this.ArrOfKnuckles = new int[GetLenght, GetLenght];
@@ -32,6 +32,7 @@ namespace Game
         }
         public void PrintOfKnuckles()
         {
+
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(0); j++)
@@ -51,7 +52,10 @@ namespace Game
                 }
                 Console.WriteLine();
             }
+
+
             MovingTheKnuckles();
+
         }
         public int[,] MovingTheKnuckles()
         {
@@ -59,7 +63,7 @@ namespace Game
             do
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write("Какую костяшку, ПО ОНОШЕНИЮ ---К НУЛЮ---, передвинуть ");
+                Console.Write("Какую костяшку ПО ОНОШЕНИЮ ---К НУЛЮ---, передвинуть ");
                 Console.ForegroundColor = ConsoleColor.White;
                 q = Convert.ToInt32(Console.ReadLine());
 
@@ -99,6 +103,7 @@ namespace Game
                 {
                     if (ArrOfKnuckles[i, j] == 0)
                     {
+                        //----------------===
                         if (ArrOfKnuckles[0, 0] == 0)
                         {
                             if ((ArrOfKnuckles[0, 0 + 1] == q || ArrOfKnuckles[0 + 1, 0] == q))
@@ -135,146 +140,72 @@ namespace Game
                             }
                             break;
                         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
+                        //----------------===
+                        if (ArrOfKnuckles[0, j] == 0)
+                        {
+                            if (ArrOfKnuckles[0, 0] != 0 || ArrOfKnuckles[0, ArrOfKnuckles.GetLength(1) - 1] != 0)
+                            {
+                                if (ArrOfKnuckles[i + 1, j] == q || ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i, j - 1] == q)
+                                {
+                                    x++;
+                                    break;
+                                }
+                                break;
+                            }
+                        }
+                        if (ArrOfKnuckles[i, 0] == 0)
+                        {
+                            if (ArrOfKnuckles[i, 0] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, 0] != 0)
+                            {
+                                if (ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i + 1, j] == q || ArrOfKnuckles[i - 1, j] == q)
+                                {
+                                    x++;
+                                    break;
+                                }
+                                break;
+                            }
+                        }
+                        if (ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, j] == 0)
+                        {
+                            if (ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, j] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, ArrOfKnuckles.GetLength(1) - 1] != 0)
+                            {
+                                if (ArrOfKnuckles[i - 1, j] == q || ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i, j - 1] == q)
+                                {
+                                    x++;
+                                    break;
+                                }
+                                break;
+                            }
+                        }
+                        if (ArrOfKnuckles[i, ArrOfKnuckles.GetLength(1) - 1] == 0)
+                        {
+                            if (ArrOfKnuckles[i, ArrOfKnuckles.GetLength(1) - 1] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, ArrOfKnuckles.GetLength(1) - 1] != 0)
+                            {
+                                if (ArrOfKnuckles[i - 1, j] == q || ArrOfKnuckles[i + 1, j] == q || ArrOfKnuckles[i, j - 1] == q)
+                                {
+                                    x++;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
                         //------------------
-                        if (ArrOfKnuckles[1, 0] == 0)
+                        if (ArrOfKnuckles[0, j] != 0 || ArrOfKnuckles[i, 0] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, j] != 0 || ArrOfKnuckles[i, ArrOfKnuckles.GetLength(1) - 1] != 0)
                         {
-                            if ((ArrOfKnuckles[1, 0 + 1] == q || ArrOfKnuckles[1 + 1, 0] == q || ArrOfKnuckles[1 - 1, 0] == q))
+                            if (ArrOfKnuckles[i, j - 1] == q || ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i - 1, j] == q || ArrOfKnuckles[i + 1, j] == q)
                             {
                                 x++;
                                 break;
                             }
                             break;
                         }
-                        if (ArrOfKnuckles[1, 3] == 0)
-                        {
-                            if ((ArrOfKnuckles[1, 3 - 1] == q || ArrOfKnuckles[1 - 1, 3] == q || ArrOfKnuckles[1 + 1, 3] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-
-                        if (ArrOfKnuckles[2, 0] == 0)
-                        {
-                            if ((ArrOfKnuckles[2, 0 + 1] == q || ArrOfKnuckles[2 + 1, 0] == q || ArrOfKnuckles[2 - 1, 0] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[2, 3] == 0)
-                        {
-                            if ((ArrOfKnuckles[2, 3 - 1] == q || ArrOfKnuckles[2 - 1, 3] == q || ArrOfKnuckles[2 + 1, 3] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-
-                        if (ArrOfKnuckles[3, 2] == 0)
-                        {
-                            if ((ArrOfKnuckles[3 - 1, 2] == q || ArrOfKnuckles[3, 2 + 1] == q || ArrOfKnuckles[3, 2 - 1] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[0, 2] == 0)
-                        {
-                            if ((ArrOfKnuckles[0 + 1, 2] == q || ArrOfKnuckles[0, 2 + 1] == q || ArrOfKnuckles[0, 2 - 1] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-
-                        if (ArrOfKnuckles[3, 1] == 0)
-                        {
-                            if ((ArrOfKnuckles[3 - 1, 1] == q || ArrOfKnuckles[3, 1 + 1] == q || ArrOfKnuckles[3, 1 - 1] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[0, 1] == 0)
-                        {
-                            if ((ArrOfKnuckles[0 + 1, 1] == q || ArrOfKnuckles[0, 1 - 1] == q || ArrOfKnuckles[0, 1 + 1] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-
                         //------------------
-                        if (ArrOfKnuckles[1, 1] == 0)
-                        {
-                            if (ArrOfKnuckles[1, 1 - 1] == q || ArrOfKnuckles[1, 1 + 1] == q || ArrOfKnuckles[1 - 1, 1] == q || ArrOfKnuckles[1 + 1, 1] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[1, 2] == 0)
-                        {
-                            if (ArrOfKnuckles[1, 2 - 1] == q || ArrOfKnuckles[1, 2 + 1] == q || ArrOfKnuckles[1 - 1, 2] == q || ArrOfKnuckles[1 + 1, 2] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[2, 1] == 0)
-                        {
-                            if (ArrOfKnuckles[2, 1 - 1] == q || ArrOfKnuckles[2, 1 + 1] == q || ArrOfKnuckles[2 - 1, 1] == q || ArrOfKnuckles[2 + 1, 1] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[2, 2] == 0)
-                        {
-                            if (ArrOfKnuckles[2, 2 - 1] == q || ArrOfKnuckles[2, 2 + 1] == q || ArrOfKnuckles[2 - 1, 2] == q || ArrOfKnuckles[2 + 1, 2] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        //------
                         break;
                     }
+                }
+                if (x > 0)
+                {
+                    break;
                 }
             }
             if (x > 0) return true;
@@ -283,14 +214,20 @@ namespace Game
         public void RandomGen()
         {
             Random gen = new Random();
-            int x = 0;
+            int x = 0, z = 0, c = 0;
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
                 {
+
+                    z = gen.Next(0, ArrOfKnuckles.GetLength(0));
+                    c = gen.Next(0, ArrOfKnuckles.GetLength(1));
+
+
                     x = ArrOfKnuckles[i, j];
-                    ArrOfKnuckles[i, j] = ArrOfKnuckles[0, ArrOfKnuckles.GetLength(0) -1];
-                    ArrOfKnuckles[0, ArrOfKnuckles.GetLength(0) - 1] = x;
+                    ArrOfKnuckles[i, j] = ArrOfKnuckles[z, c];
+                    ArrOfKnuckles[z, c] = x;
+
 
                 }
             }
