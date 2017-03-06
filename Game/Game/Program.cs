@@ -10,7 +10,7 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Knuckle knuckle = new Knuckle(7);
+            Knuckle knuckle = new Knuckle(4);
         }
     }
 }

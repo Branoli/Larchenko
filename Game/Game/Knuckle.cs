@@ -8,21 +8,22 @@ namespace Game
 {
     class Knuckle
     {
-        private int[,] ArrOfKnuckles;
+        public int[,] ArrOfKnuckles;
         public Knuckle(int GetLenght)
         {
             this.ArrOfKnuckles = new int[GetLenght, GetLenght];
-            this.ArrOfKnuckles = ArrOfKnuckle(GetLenght);
+            this.ArrOfKnuckles = ArrOfKnuckle();
             RandomGen();
             PrintOfKnuckles();
+            
         }
 
-        public int[,] ArrOfKnuckle(int GetLenght)
+        public int[,] ArrOfKnuckle()
         {
             int x = 0;
-            for (int i = 0; i < GetLenght; i++)
+            for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
             {
-                for (int j = 0; j < GetLenght; j++)
+                for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
                 {
                     ArrOfKnuckles[i, j] = x;
                     x++;
@@ -32,7 +33,6 @@ namespace Game
         }
         public void PrintOfKnuckles()
         {
-
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(0); j++)
@@ -42,7 +42,6 @@ namespace Game
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("\t{0}", this.ArrOfKnuckles[i, j]);
-
                     }
                     else
                     {
@@ -52,10 +51,7 @@ namespace Game
                 }
                 Console.WriteLine();
             }
-
-
             MovingTheKnuckles();
-
         }
         public int[,] MovingTheKnuckles()
         {
