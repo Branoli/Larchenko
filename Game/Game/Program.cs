@@ -10,7 +10,10 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Knuckle knuckle = new Knuckle();
+
+            Game3 game = new Game3(2);
+            
+            Console.ReadKey();
         }
     }
 }
