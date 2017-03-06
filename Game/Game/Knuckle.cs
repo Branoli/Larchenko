@@ -8,7 +8,7 @@ namespace Game
 {
     class Knuckle
     {
-        public int[,] ArrOfKnuckles;
+        private int[,] ArrOfKnuckles;
         public Knuckle()
         {
             this.ArrOfKnuckles = new int[4, 4];
