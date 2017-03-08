@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,17 +9,148 @@ namespace Game
 {
     class Knuckle
     {
-        public int[,] ArrOfKnuckles;
+        public readonly int[,] ArrOfKnuckles;
+
         public Knuckle(int GetLenght)
         {
             this.ArrOfKnuckles = new int[GetLenght, GetLenght];
             this.ArrOfKnuckles = ArrOfKnuckle();
             RandomGen();
-            PrintOfKnuckles();
-            
+            Print.PrintMasOfKnuckle(ArrOfKnuckles);
+            MovingTheKnuckles();
+        }
+        public Knuckle(string file)
+        {
+            string FileSeparator = File.ReadAllText(file, Encoding.GetEncoding(1251));
+            string[] Mas = FileSeparator.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if ((CheckString(Mas) == true) && (CheckNumber(Mas) == true) && (CheckMas(Mas) == true))
+            {
+                this.ArrOfKnuckles = new int[(int)Math.Sqrt(Mas.Length), (int)Math.Sqrt(Mas.Length)];
+                ArrFromString(Mas);
+                Print.PrintMasOfKnuckle(ArrOfKnuckles);
+                MovingTheKnuckles();
+            }
+            else
+            {
+                Print.PrintExseption(ArrOfKnuckles);
+            }
         }
 
-        public int[,] ArrOfKnuckle()
+        public void ArrFromString(string[] Mas)
+        {
+            int x = 0;
+            for (int i = 0; i < Math.Sqrt(Mas.Length); i++)
+            {
+                for (int j = 0; j < Math.Sqrt(Mas.Length); j++)
+                {
+                    ArrOfKnuckles[i, j] = Int32.Parse(Mas[x]);
+                    x++;
+                }
+            }
+            
+        }
+        public bool CheckNumber(string[] Mas)
+        {
+            int x = 0, Max = 0;
+            for (int i = 0; i < Mas.Length; i++)
+            {
+                for (int j = 0; j < Mas.Length; j++)
+                {
+                    if (i == Int32.Parse(Mas[j]))
+                    {
+                        x++;
+                        if (Max < Int32.Parse(Mas[i]))
+                        {
+                            Max = Int32.Parse(Mas[i]);
+                        }
+                        break;
+                    }
+                }
+            }
+            if ((x == Mas.Length) && (Max == Mas.Length - 1))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool CheckString(string[] Mas)
+        {
+            string[] RusAlph = { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
+            string[] EuAlph = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+            int x = 0;
+            for (int i = 0; i < Mas.Length; i++)
+            {
+                for (int j = 0; j < RusAlph.Length; j++)
+                {
+                    if (Mas[i].Contains(RusAlph[j]) == true)
+                    {
+                        x++;
+                    }
+                    if (Mas[i].Contains(RusAlph[j].ToLower()) == true)
+                    {
+                        x++;
+                    }
+
+                }
+                for (int j = 0; j < EuAlph.Length; j++)
+                {
+                    if (Mas[i].Contains(EuAlph[j]) == true)
+                    {
+                        x++;
+                    }
+                    if (Mas[i].Contains(EuAlph[j].ToLower()) == true)
+                    {
+                        x++;
+                    }
+                }
+            }
+            if (x > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public bool CheckMas(string[] Mas)
+        {
+            int[] number = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int x = 0;
+            for (int i = 0; i < number.Length; i++)
+            {
+                if (Math.Sqrt(Mas.Length) == number[i])
+                {
+                    x++;
+                    break;
+                }
+            }
+            if (x > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public int[,] FileInKnuckle(string[] FileSeparator)
+        {
+            int x = 0;
+            for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
+            {
+                for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
+                {
+                    
+                }
+            }
+            return ArrOfKnuckles;
+
+        }
+        private int[,] ArrOfKnuckle()
         {
             int x = 0;
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
@@ -31,183 +163,68 @@ namespace Game
             }
             return ArrOfKnuckles;
         }
-        public void PrintOfKnuckles()
+        public bool CheckTheKnuckle(int q)
         {
-            for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
+            int x = 0, y = 0, z = 0, c = 0;
+            for (int i = 0; i < ArrOfKnuckles.GetLength(1); i++)
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(0); j++)
                 {
-
-                    if (this.ArrOfKnuckles[i, j] == 0)
+                    if (ArrOfKnuckles[i,j] == q)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("\t{0}", this.ArrOfKnuckles[i, j]);
+                        x = i;
+                        y = j;
                     }
-                    else
+                    if (ArrOfKnuckles[i,j] == 0)
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("\t{0}", this.ArrOfKnuckles[i, j]);
+                        z = i;
+                        c = j;
                     }
                 }
-                Console.WriteLine();
             }
-            MovingTheKnuckles();
+            if (Math.Sqrt(Math.Pow(z - x, 2) + Math.Pow(c - y, 2)) == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        public int[,] MovingTheKnuckles()
+        private void MovingTheKnuckles()
         {
             int q = 0;
             do
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write("Какую костяшку ПО ОНОШЕНИЮ ---К НУЛЮ---, передвинуть ");
-                Console.ForegroundColor = ConsoleColor.White;
+                Print.PrintQ();
                 q = Convert.ToInt32(Console.ReadLine());
+            } while (CheckTheKnuckle(q) == false);
 
-            } while (CheckTheKnuckles(q) != true);
 
-            for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
+            int x = 0, y = 0, z = 0, c = 0, v = 0;
+            for (int i = 0; i < ArrOfKnuckles.GetLength(1); i++)
             {
-                for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
+                for (int j = 0; j < ArrOfKnuckles.GetLength(0); j++)
                 {
                     if (ArrOfKnuckles[i, j] == q)
                     {
-
-                        for (int n = 0; n < ArrOfKnuckles.GetLength(0); n++)
-                        {
-                            for (int k = 0; k < ArrOfKnuckles.GetLength(1); k++)
-                            {
-                                if (ArrOfKnuckles[n, k] == 0)
-                                {
-                                    Console.Clear();
-                                    ArrOfKnuckles[i, j] = 0;
-                                    ArrOfKnuckles[n, k] = q;
-                                    PrintOfKnuckles();
-                                }
-                            }
-                        }
+                        x = i;
+                        y = j;
                     }
-                }
-            }
-            return ArrOfKnuckles;
-        }
-        public bool CheckTheKnuckles(int q)
-        {
-            int x = 0;
-            for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
-            {
-                for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
-                {
                     if (ArrOfKnuckles[i, j] == 0)
                     {
-                        //----------------===
-                        if (ArrOfKnuckles[0, 0] == 0)
-                        {
-                            if ((ArrOfKnuckles[0, 0 + 1] == q || ArrOfKnuckles[0 + 1, 0] == q))
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[0, ArrOfKnuckles.GetLength(1) - 1] == 0)
-                        {
-                            if (ArrOfKnuckles[0, (ArrOfKnuckles.GetLength(1) - 1) - 1] == q || ArrOfKnuckles[0 + 1, (ArrOfKnuckles.GetLength(1) - 1)] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if ((ArrOfKnuckles[(ArrOfKnuckles.GetLength(0) - 1), 0]) == 0)
-                        {
-                            if (ArrOfKnuckles[(ArrOfKnuckles.GetLength(0) - 1), 0 + 1] == q || ArrOfKnuckles[(ArrOfKnuckles.GetLength(0) - 1) - 1, 0] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        if (ArrOfKnuckles[(ArrOfKnuckles.GetLength(0) - 1), (ArrOfKnuckles.GetLength(1) - 1)] == 0)
-                        {
-                            if (ArrOfKnuckles[(ArrOfKnuckles.GetLength(0) - 1), (ArrOfKnuckles.GetLength(1) - 1) - 1] == q || ArrOfKnuckles[(ArrOfKnuckles.GetLength(0) - 1) - 1, (ArrOfKnuckles.GetLength(1) - 1)] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        //----------------===
-                        if (ArrOfKnuckles[0, j] == 0)
-                        {
-                            if (ArrOfKnuckles[0, 0] != 0 || ArrOfKnuckles[0, ArrOfKnuckles.GetLength(1) - 1] != 0)
-                            {
-                                if (ArrOfKnuckles[i + 1, j] == q || ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i, j - 1] == q)
-                                {
-                                    x++;
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        if (ArrOfKnuckles[i, 0] == 0)
-                        {
-                            if (ArrOfKnuckles[i, 0] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, 0] != 0)
-                            {
-                                if (ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i + 1, j] == q || ArrOfKnuckles[i - 1, j] == q)
-                                {
-                                    x++;
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        if (ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, j] == 0)
-                        {
-                            if (ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, j] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, ArrOfKnuckles.GetLength(1) - 1] != 0)
-                            {
-                                if (ArrOfKnuckles[i - 1, j] == q || ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i, j - 1] == q)
-                                {
-                                    x++;
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        if (ArrOfKnuckles[i, ArrOfKnuckles.GetLength(1) - 1] == 0)
-                        {
-                            if (ArrOfKnuckles[i, ArrOfKnuckles.GetLength(1) - 1] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, ArrOfKnuckles.GetLength(1) - 1] != 0)
-                            {
-                                if (ArrOfKnuckles[i - 1, j] == q || ArrOfKnuckles[i + 1, j] == q || ArrOfKnuckles[i, j - 1] == q)
-                                {
-                                    x++;
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                        //------------------
-                        if (ArrOfKnuckles[0, j] != 0 || ArrOfKnuckles[i, 0] != 0 || ArrOfKnuckles[ArrOfKnuckles.GetLength(0) - 1, j] != 0 || ArrOfKnuckles[i, ArrOfKnuckles.GetLength(1) - 1] != 0)
-                        {
-                            if (ArrOfKnuckles[i, j - 1] == q || ArrOfKnuckles[i, j + 1] == q || ArrOfKnuckles[i - 1, j] == q || ArrOfKnuckles[i + 1, j] == q)
-                            {
-                                x++;
-                                break;
-                            }
-                            break;
-                        }
-                        //------------------
-                        break;
+                        z = i;
+                        c = j;
                     }
                 }
-                if (x > 0)
-                {
-                    break;
-                }
             }
-            if (x > 0) return true;
-            else return false;
+            v = ArrOfKnuckles[x, y];
+            ArrOfKnuckles[x, y] = ArrOfKnuckles[z, c];
+            ArrOfKnuckles[z, c] = v;
+            Print.PrintMasOfKnuckle(ArrOfKnuckles);
+            MovingTheKnuckles();
         }
-        public void RandomGen()
+        private void RandomGen()
         {
             Random gen = new Random();
             int x = 0, z = 0, c = 0;

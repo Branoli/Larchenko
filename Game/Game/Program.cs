@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Knuckle knuckle = new Knuckle(4);
+            string s = @"d:\MasOfKnuckle.txt";
+            Knuckle knuckle = new Knuckle(s);
+            Console.ReadKey();
         }
     }
 }
