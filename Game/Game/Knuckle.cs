@@ -36,7 +36,7 @@ namespace Game
             }
         }
 
-        public void ArrFromString(string[] Mas)
+        private void ArrFromString(string[] Mas)
         {
             int x = 0;
             for (int i = 0; i < Math.Sqrt(Mas.Length); i++)
@@ -49,7 +49,7 @@ namespace Game
             }
             
         }
-        public bool CheckNumber(string[] Mas)
+        private bool CheckNumber(string[] Mas)
         {
             int x = 0, Max = 0;
             for (int i = 0; i < Mas.Length; i++)
@@ -76,7 +76,7 @@ namespace Game
                 return false;
             }
         }
-        public bool CheckString(string[] Mas)
+        private bool CheckString(string[] Mas)
         {
             string[] RusAlph = { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
             string[] EuAlph = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -116,7 +116,7 @@ namespace Game
                 return true;
             }
         }
-        public bool CheckMas(string[] Mas)
+        private bool CheckMas(string[] Mas)
         {
             int[] number = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             int x = 0;
@@ -137,7 +137,7 @@ namespace Game
                 return false;
             }
         }
-        public int[,] FileInKnuckle(string[] FileSeparator)
+        private int[,] FileInKnuckle(string[] FileSeparator)
         {
             int x = 0;
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
