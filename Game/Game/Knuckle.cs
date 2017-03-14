@@ -9,120 +9,81 @@ namespace Game
 {
     class Knuckle
     {
+        public int this[int i, int j]
+        {
+            get 
+            {
+                return ArrOfKnuckles[i, j];
+            }
+            set 
+            {
+                ArrOfKnuckles[i, j] = value;
+            }
+        }
+
         public readonly int[,] ArrOfKnuckles;
 
         public Knuckle(int GetLenght)
         {
             this.ArrOfKnuckles = new int[GetLenght, GetLenght];
-            this.ArrOfKnuckles = ArrOfKnuckle();
+            ArrOfKnuckle();
             RandomGen();
-            Print.PrintMasOfKnuckle(ArrOfKnuckles);
             MovingTheKnuckles();
         }
-        public Knuckle(string file)
+        public Knuckle(List<int> mas)
         {
-            string FileSeparator = File.ReadAllText(file, Encoding.GetEncoding(1251));
-            string[] Mas = FileSeparator.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            if ((CheckString(Mas) == true) && (CheckNumber(Mas) == true) && (CheckMas(Mas) == true))
-            {
-                this.ArrOfKnuckles = new int[(int)Math.Sqrt(Mas.Length), (int)Math.Sqrt(Mas.Length)];
-                ArrFromString(Mas);
-                Print.PrintMasOfKnuckle(ArrOfKnuckles);
-                MovingTheKnuckles();
-            }
-            else
-            {
-                Print.PrintExseption(ArrOfKnuckles);
-            }
+            ArrOfKnuckles = new int[(int)Math.Sqrt(mas.Count), (int)Math.Sqrt(mas.Count)];
+            CheckNumber(mas);
+            MovingTheKnuckles();
         }
-
-        private void ArrFromString(string[] Mas)
+        //--------------------------
+        private void ArrFromString(List<int> Mas)
         {
+            
             int x = 0;
-            for (int i = 0; i < Math.Sqrt(Mas.Length); i++)
+            for (int i = 0; i < Math.Sqrt(Mas.Count); i++)
             {
-                for (int j = 0; j < Math.Sqrt(Mas.Length); j++)
+                for (int j = 0; j < Math.Sqrt(Mas.Count); j++)
                 {
-                    ArrOfKnuckles[i, j] = Int32.Parse(Mas[x]);
+                    this[i, j] = Mas[x];
                     x++;
                 }
             }
-            
         }
-        private bool CheckNumber(string[] Mas)
+        private void CheckNumber(List<int> Mas)
         {
             int x = 0, Max = 0;
-            for (int i = 0; i < Mas.Length; i++)
+            for (int i = 0; i < Mas.Count; i++)
             {
-                for (int j = 0; j < Mas.Length; j++)
+                for (int j = 0; j < Mas.Count; j++)
                 {
-                    if (i == Int32.Parse(Mas[j]))
+                    if (i == Mas[j])
                     {
                         x++;
-                        if (Max < Int32.Parse(Mas[i]))
+                        if (Max < Mas[i])
                         {
-                            Max = Int32.Parse(Mas[i]);
+                            Max = Mas[i];
                         }
                         break;
                     }
                 }
             }
-            if ((x == Mas.Length) && (Max == Mas.Length - 1))
+            if ((x == Mas.Count) && (Max == Mas.Count - 1))
             {
-                return true;
+                ArrFromString(Mas);
             }
             else
             {
-                return false;
+                
             }
         }
-        private bool CheckString(string[] Mas)
-        {
-            string[] RusAlph = { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
-            string[] EuAlph = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-            int x = 0;
-            for (int i = 0; i < Mas.Length; i++)
-            {
-                for (int j = 0; j < RusAlph.Length; j++)
-                {
-                    if (Mas[i].Contains(RusAlph[j]) == true)
-                    {
-                        x++;
-                    }
-                    if (Mas[i].Contains(RusAlph[j].ToLower()) == true)
-                    {
-                        x++;
-                    }
-
-                }
-                for (int j = 0; j < EuAlph.Length; j++)
-                {
-                    if (Mas[i].Contains(EuAlph[j]) == true)
-                    {
-                        x++;
-                    }
-                    if (Mas[i].Contains(EuAlph[j].ToLower()) == true)
-                    {
-                        x++;
-                    }
-                }
-            }
-            if (x > 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        private bool CheckMas(string[] Mas)
+        private void CheckMas(List<int> Mas)
         {
             int[] number = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             int x = 0;
             for (int i = 0; i < number.Length; i++)
             {
-                if (Math.Sqrt(Mas.Length) == number[i])
+                if (Math.Sqrt(Mas.Count) == number[i])
                 {
                     x++;
                     break;
@@ -130,38 +91,25 @@ namespace Game
             }
             if (x > 0)
             {
-                return true;
+                ArrFromString(Mas);
             }
             else
             {
-                return false;
+                 
             }
         }
-        private int[,] FileInKnuckle(string[] FileSeparator)
+        //--------------------------
+        private void ArrOfKnuckle()
         {
             int x = 0;
             for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
                 {
-                    
-                }
-            }
-            return ArrOfKnuckles;
-
-        }
-        private int[,] ArrOfKnuckle()
-        {
-            int x = 0;
-            for (int i = 0; i < ArrOfKnuckles.GetLength(0); i++)
-            {
-                for (int j = 0; j < ArrOfKnuckles.GetLength(1); j++)
-                {
-                    ArrOfKnuckles[i, j] = x;
+                    this[i, j] = x;
                     x++;
                 }
             }
-            return ArrOfKnuckles;
         }
         public bool CheckTheKnuckle(int q)
         {
@@ -170,12 +118,12 @@ namespace Game
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(0); j++)
                 {
-                    if (ArrOfKnuckles[i,j] == q)
+                    if (this[i, j] == q)
                     {
                         x = i;
                         y = j;
                     }
-                    if (ArrOfKnuckles[i,j] == 0)
+                    if (this[i, j] == 0)
                     {
                         z = i;
                         c = j;
@@ -191,12 +139,11 @@ namespace Game
                 return false;
             }
         }
-        private void MovingTheKnuckles()
+        public void MovingTheKnuckles()
         {
             int q = 0;
             do
             {
-                Print.PrintQ();
                 q = Convert.ToInt32(Console.ReadLine());
             } while (CheckTheKnuckle(q) == false);
 
@@ -206,24 +153,24 @@ namespace Game
             {
                 for (int j = 0; j < ArrOfKnuckles.GetLength(0); j++)
                 {
-                    if (ArrOfKnuckles[i, j] == q)
+                    if (this[i, j] == q)
                     {
                         x = i;
                         y = j;
                     }
-                    if (ArrOfKnuckles[i, j] == 0)
+                    if (this[i, j] == 0)
                     {
                         z = i;
                         c = j;
                     }
                 }
             }
-            v = ArrOfKnuckles[x, y];
-            ArrOfKnuckles[x, y] = ArrOfKnuckles[z, c];
-            ArrOfKnuckles[z, c] = v;
-            Print.PrintMasOfKnuckle(ArrOfKnuckles);
+            v = this[x, y];
+            this[x, y] = this[z, c];
+            this[z, c] = v;
             MovingTheKnuckles();
         }
+        //==========================
         private void RandomGen()
         {
             Random gen = new Random();
@@ -237,9 +184,9 @@ namespace Game
                     c = gen.Next(0, ArrOfKnuckles.GetLength(1));
 
 
-                    x = ArrOfKnuckles[i, j];
-                    ArrOfKnuckles[i, j] = ArrOfKnuckles[z, c];
-                    ArrOfKnuckles[z, c] = x;
+                    x = this[i, j];
+                    this[i, j] = this[z, c];
+                    this[z, c] = x;
 
 
                 }

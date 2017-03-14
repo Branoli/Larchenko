@@ -11,7 +11,8 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Knuckle knuckle = new Knuckle(@"d:\MasOfKnuckle.txt");
+            Reader read = new Reader("D:\\MasOfKnuckle.txt");
+            //Knuckle game = new Knuckle(6);
             Console.ReadKey();
         }
     }
