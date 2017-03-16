@@ -22,19 +22,19 @@ namespace Game
         }
 
         public readonly int[,] ArrOfKnuckles;
-
+        public readonly int Size;
         public Knuckle(int GetLenght)
         {
             this.ArrOfKnuckles = new int[GetLenght, GetLenght];
+            Size = GetLenght;
             ArrOfKnuckle();
             RandomGen();
-            MovingTheKnuckles();
         }
         public Knuckle(List<int> mas)
         {
             ArrOfKnuckles = new int[(int)Math.Sqrt(mas.Count), (int)Math.Sqrt(mas.Count)];
             CheckNumber(mas);
-            MovingTheKnuckles();
+            Size = (int)Math.Sqrt(mas.Count);
         }
         //--------------------------
         private void ArrFromString(List<int> Mas)
@@ -139,15 +139,8 @@ namespace Game
                 return false;
             }
         }
-        public void MovingTheKnuckles()
+        public void MovingTheKnuckles(int q)
         {
-            int q = 0;
-            do
-            {
-                q = Convert.ToInt32(Console.ReadLine());
-            } while (CheckTheKnuckle(q) == false);
-
-
             int x = 0, y = 0, z = 0, c = 0, v = 0;
             for (int i = 0; i < ArrOfKnuckles.GetLength(1); i++)
             {
@@ -168,7 +161,6 @@ namespace Game
             v = this[x, y];
             this[x, y] = this[z, c];
             this[z, c] = v;
-            MovingTheKnuckles();
         }
         //==========================
         private void RandomGen()

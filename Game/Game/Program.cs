@@ -11,8 +11,18 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Reader read = new Reader("D:\\MasOfKnuckle.txt");
-            //Knuckle game = new Knuckle(6);
+
+
+
+
+            //do
+            //{
+                Knuckle game = new Knuckle(Reader.Readerr("d:\\MasOfKnuckle.txt"));
+                Print.PrintMasOfKnuckle(game);
+                Print.PrintQ();
+                game.MovingTheKnuckles(4);
+            //} while (game.CheckWin == false);
+            
             Console.ReadKey();
         }
     }

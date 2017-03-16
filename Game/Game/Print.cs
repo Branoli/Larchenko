@@ -8,23 +8,23 @@ namespace Game
 {
     static class Print
     {
-        public static void PrintMasOfKnuckle(int[,] mas)
+        public static void PrintMasOfKnuckle(Knuckle game)
         {
             Console.Clear();
-            for (int i = 0; i < mas.GetLength(0); i++)
+            for (int i = 0; i < game.Size; i++)
             {
-                for (int j = 0; j < mas.GetLength(0); j++)
+                for (int j = 0; j < game.Size; j++)
                 {
 
-                    if (mas[i, j] == 0)
+                    if (game[i, j] == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("\t{0}", mas[i, j]);
+                        Console.Write("\t{0}", game[i, j]);
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("\t{0}", mas[i, j]);
+                        Console.Write("\t{0}", game[i, j]);
                     }
                 }
                 Console.WriteLine();

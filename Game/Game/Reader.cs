@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Reader
+    public static class Reader
     {
-        List<int> mas;
-        public Reader(string file)
+        public static List<int> mas;
+        public static List<int> Readerr(string file)
         {
             string FileSeparator = File.ReadAllText(file, Encoding.GetEncoding(1251));
             string[] Mas = FileSeparator.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             CheckString(Mas);
             if (mas != null)
             {
-                Knuckle game = new Knuckle(mas);
+                return mas;
             }
             else
             {
-                
+                return null;
             }
         }
-        private void CheckString(string[] Mas)
+        static void CheckString(string[] Mas)
         {             
             string[] RusAlph = { "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" };
             string[] EuAlph = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -60,7 +60,7 @@ namespace Game
                 Writer(Mas);
             }
         }
-        private void Writer(string[] Mas)
+        static void Writer(string[] Mas)
         {
             mas = new List<int>();
             for (int i = 0; i < Mas.Length; i++)
